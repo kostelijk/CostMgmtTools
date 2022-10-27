@@ -56,8 +56,8 @@ foreach($subscription in $subscriptions){
             $uploadResponse = Invoke-RestMethod -Uri $uri -Method "Post" -Body $body -Headers $headers;
 
             # Let's see how the response looks like
-            Write-Output $uploadResponse
-            Write-Output "---------------------"
+            Write-Host $uploadResponse
+            Write-Host "---------------------"
         }
     } 
 
