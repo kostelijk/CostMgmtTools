@@ -10,6 +10,7 @@ if ($Timer.IsPastDue) {
 }
 
 ################################################## Sample Script ###########################################################
+# https://learn.microsoft.com/en-us/azure/azure-monitor/logs/tutorial-logs-ingestion-portal$$
 
 $DceURI = "https://logrunningvm-oyua.westeurope-1.ingest.monitor.azure.com"
 $DcrImmutableId = "dcr-c1ee038a22ac48edaf8ae4271dca8d79"
@@ -22,19 +23,22 @@ Connect-AzAccount -Identity
 $resourceURI = "https://monitor.azure.com/"
 $accessToken = get-azaccesstoken -ResourceUrl $resourceURI
 
-
-$subscriptions = Get-AzSubscription
+#$subscriptions = Get-AzSubscription
+$subscriptions = ($env:AzureSubscription_IDs).split(',')
 
 foreach($subscription in $subscriptions){
 
-    Set-AzContext -subscriptionId $subscription.Id
+    #Set-AzContext -subscriptionId $subscription.Id
+    Set-AzContext -subscriptionId $subscription
 
-    $runningVMs = get-azvm -Status|where-object PowerState -eq "VM Running"|Select-Object -Property * -ExpandProperty HardwareProfile|Group-Object VmSize|Select-Object -Property Name, Count
+    $runningVMs += get-azvm -Status|where-object PowerState -eq "VM Running"
 
     # Pricing info: https://learn.microsoft.com/en-us/rest/api/cost-management/retail-prices/azure-retail-prices
     #$vmSize = (Invoke-WebRequest -Uri "https://prices.azure.com/api/retail/prices?api-version=2021-10-01-preview&currencyCode='EUR'&`$filter=serviceName eq 'Virtual Machines' and armSkuName eq 'Standard_B2s' and armRegionName eq 'westeurope'").Content|ConvertFrom-Json
+}
 
     if($runningVMs){
+        $runningVMs = $runningVMs|Select-Object -Property * -ExpandProperty HardwareProfile|Group-Object VmSize|Select-Object -Property Name, Count
         ## Generate and send some data
         foreach ($runningVM in $runningVMs) {
             # We are going to send log entries one by one with a small delay
@@ -56,8 +60,6 @@ foreach($subscription in $subscriptions){
             Write-Output "---------------------"
         }
     } 
-}
-
 
 # Write an information log with the current time.
 Write-Host "PowerShell timer trigger function ran! TIME: $currentUTCtime"
