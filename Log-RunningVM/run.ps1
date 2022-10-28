@@ -10,10 +10,9 @@ if ($Timer.IsPastDue) {
 }
 
 ################################################## Sample Script ###########################################################
-# https://learn.microsoft.com/en-us/azure/azure-monitor/logs/tutorial-logs-ingestion-portal$$
 
-$DceURI = "https://logrunningvm-oyua.westeurope-1.ingest.monitor.azure.com"
-$DcrImmutableId = "dcr-c1ee038a22ac48edaf8ae4271dca8d79"
+$DceURI = $env:DceURI
+$DcrImmutableId = $env:DcrImmutableId
 $Table = "RunningVMs_CL"
 
 # Function App needs to logon with MI to be able to query subscriptions
