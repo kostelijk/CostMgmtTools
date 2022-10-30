@@ -116,6 +116,15 @@ resource functionApp 'Microsoft.Web/sites@2021-03-01' = {
         }
         {
           name: 'FUNCTIONS_WORKER_RUNTIME_VERSION'
+          value: '~7'
+        }
+        {
+          name: 'dcrImmutalbeId'
+          value: dataCollectionRule.properties.immutableId
+        }
+        {
+          name: 'dceURI'
+          value: dataCollectionEndpoint.properties.logsIngestion.endpoint
         }
       ]
       ftpsState: 'FtpsOnly'
@@ -187,3 +196,6 @@ resource dataCollectionRule 'Microsoft.Insights/dataCollectionRules@2021-09-01-p
     ]
   }
 }
+
+output dceURI string = dataCollectionEndpoint.properties.logsIngestion.endpoint
+output dcrImmutableId string = dataCollectionRule.properties.immutableId
