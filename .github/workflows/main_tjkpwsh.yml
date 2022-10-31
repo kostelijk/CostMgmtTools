@@ -13,21 +13,21 @@ env:
     laName: DefaultWorkspace-30483fd2-311e-4847-81bf-4fa79f8f8f44-WEU
     workspaceId: ab431c8494a14886aa0576f01ea23b5a
 
-jobs:
-  lint:
-    uses: ./.github/workflows/lint.yml
+#jobs:
+#  lint:
+#    uses: ./.github/workflows/lint.yml
 
-  deploy-functionapp:
-    runs-on: windows-latest
-    steps:
-      -name: 'functionapp'
-       uses: ./.github/workflows/deploy.yml
-       needs: lint
-       with:
-        resourceGroupName: ${{ env.resourceGroupName }}
-        laResourceGroup: ${{ env.laResourceGroup }}
-        laName: ${{ env.laName }}
-        workspaceId: ${{ env.workspaceId }}
+#  deploy-functionapp:
+#    runs-on: windows-latest
+#    steps:
+#      -name: 'functionapp'
+#       uses: ./.github/workflows/deploy.yml
+#       needs: lint
+#       with:
+#        resourceGroupName: ${{ env.resourceGroupName }}
+#        laResourceGroup: ${{ env.laResourceGroup }}
+#        laName: ${{ env.laName }}
+#        workspaceId: ${{ env.workspaceId }}
     
 #  build-and-deploy-function:
 #    runs-on: windows-latest
