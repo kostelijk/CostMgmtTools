@@ -1,0 +1,40 @@
+name: deploy
+
+on:
+  workflow_call:
+    inputs:
+      resourceGroupName:
+        required: true
+        type: string
+      laResourceGroup:
+        required: true
+        type: string
+      laName:
+        required: true
+        type: string
+      workspaceId:
+        required: true
+        type: string
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  validate:
+     runs-on: ubuntu-latest
+     steps: 
+     - uses: actions/checkout@v2
+
+       uses: azure/arm-deploy@v1
+       name: Run preflight validation
+       with:
+         deploymentName: ${{ github.run_number }}
+         resourceGroupName: ${{ inputs.resourceGroupName }}
+         template: ./deploy/main.bicep
+         parameters: >
+           sqlServerAdministratorLoginPassword=${{ secrets.sqlServerAdministratorLoginPassword }}
+           laResourceGroup=${{ inputs.laResourceGroup }}
+           laName=${{ inputs.laName }}
+           workspaceId=${{ inputs.workspaceId }}
+         deploymentMode: Validate
