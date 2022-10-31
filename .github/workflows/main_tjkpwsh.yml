@@ -20,20 +20,17 @@ jobs:
   lint:
     uses: ./.github/workflows/lint.yml
 
-  test:
-    runs-on: ubuntu-latest
+  deploy-functionapp:
+    runs-on: windows-latest
     steps:
-      -run:
-        echo ${{ env.laName }}
-
-#  deploy-functionapp:
-#    uses: ./.github/workflows/deploy.yml
-#    needs: lint
-#    with:
-#      resourceGroupName: ${{ env.resourceGroupName }}
-#      laResourceGroup: ${{ env.laResourceGroup }}
-#      laName: ${{ env.laName }}
-#      workspaceId: ${{ env.workspaceId }}
+      -name: 'functionapp'
+       uses: ./.github/workflows/deploy.yml
+       needs: lint
+       with:
+        resourceGroupName: ${{ env.resourceGroupName }}
+        laResourceGroup: ${{ env.laResourceGroup }}
+        laName: ${{ env.laName }}
+        workspaceId: ${{ env.workspaceId }}
     
 #  build-and-deploy-function:
 #    runs-on: windows-latest
