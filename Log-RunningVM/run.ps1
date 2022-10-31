@@ -56,7 +56,7 @@ foreach($subscription in $subscriptions){
 
             # Let's see how the response looks like
             Write-Host $uploadResponse
-            Write-Host "---------------------"
+            Write-Host "-------******---------"
         }
     } 
 
