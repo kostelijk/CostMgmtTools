@@ -10,11 +10,11 @@ on:
   workflow_dispatch:
 
 env:
-  - AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
-  - resourceGroupName: RG-VMCountFADev 
-  - laResourceGroup: DefaultResourceGroup-WEU
-  - laName: DefaultWorkspace-30483fd2-311e-4847-81bf-4fa79f8f8f44-WEU
-  - workspaceId: ab431c8494a14886aa0576f01ea23b5a
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
+  resourceGroupName: RG-VMCountFADev 
+  laResourceGroup: DefaultResourceGroup-WEU
+  laName: DefaultWorkspace-30483fd2-311e-4847-81bf-4fa79f8f8f44-WEU
+  workspaceId: ab431c8494a14886aa0576f01ea23b5a
 
 jobs:
   lint:
@@ -24,7 +24,7 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     needs: lint
     with:
-      resourceGroupName: ${{ env.resourceGroupName }}
+      resourceGroupName: $resourceGroupName
       laResourceGroup: ${{ env.laResourceGroup }}
       laName: ${{ env.laName }}
       workspaceId: ${{ env.workspaceId }}
