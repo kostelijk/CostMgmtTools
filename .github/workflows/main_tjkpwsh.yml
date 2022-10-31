@@ -4,10 +4,7 @@
 name: Build and deploy Powershell project to Azure Function App - tjkpwsh
 
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+  workflow_call:
 
 env:
     AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
