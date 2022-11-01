@@ -34,12 +34,12 @@ jobs:
           echo ${{ env.workspaceId }}
 
   # Deploy to the test environment.
-#  deploy-test:
-#    uses: ./.github/workflows/deploy.yml
-#    needs: lint
-#    with:
-#      environmentType: Test
-#      resourceGroupName: ${{ env.resourceGroupName }}
-#      laResourceGroup: ${{ env.laResourceGroup }}
-#      laName: ${{ env.laName }}
-#      workspaceId: ${{ env.workspaceId }}
+  deploy-test:
+    uses: ./.github/workflows/deploy.yml
+    needs: lint
+    with:
+      environmentType: Test
+      resourceGroupName: ${{ env.resourceGroupName }}
+      laResourceGroup: ${{ env.laResourceGroup }}
+      laName: ${{ env.laName }}
+      workspaceId: ${{ env.workspaceId }}
