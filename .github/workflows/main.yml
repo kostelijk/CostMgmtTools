@@ -28,7 +28,7 @@ jobs:
     needs: lint
     with:
       environmentType: Test
-      resourceGroupName: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_092C07438EA145F393206E3751F61908 }}
-      laResourceGroup: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_092C07438EA145F393206E3751F61908 }}
-      laName: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_092C07438EA145F393206E3751F61908 }}
-      workspaceId: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_092C07438EA145F393206E3751F61908 }}
+      resourceGroupName: env.resourceGroupName
+      laResourceGroup: DefaultResourceGroup-WEU
+      laName: DefaultWorkspace-30483fd2-311e-4847-81bf-4fa79f8f8f44-WEU
+      workspaceId: ab431c8494a14886aa0576f01ea23b5a
