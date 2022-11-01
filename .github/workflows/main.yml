@@ -11,16 +11,10 @@ on:
 
 env:
     AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
-
-variables:
-    - name: resourceGroupName
-      value: RG-VMCountFADev
-    - name: laResourceGroup
-      value: DefaultResourceGroup-WEU
-    - name: laName
-      value: DefaultWorkspace-30483fd2-311e-4847-81bf-4fa79f8f8f44-WEU
-    - name: workspaceId
-      value: ab431c8494a14886aa0576f01ea23b5a
+    resourceGroupName: RG-VMCountFADev
+    laResourceGroup: DefaultResourceGroup-WEU
+    laName: DefaultWorkspace-30483fd2-311e-4847-81bf-4fa79f8f8f44-WEU
+    workspaceId: ab431c8494a14886aa0576f01ea23b5a
 
 jobs:
 
@@ -28,13 +22,24 @@ jobs:
   lint:
     uses: ./.github/workflows/lint.yml
 
+  say-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Run a one-line command'
+        run: echo "hello from GitHub Actions"
+      - name: 'Run a multi-line command'
+        run: |
+          echo "We'll add more steps soon."
+          echo "For example, we'll add our Bicep deployment step."
+          echo ${{ env.workspaceId }}
+
   # Deploy to the test environment.
-  deploy-test:
-    uses: ./.github/workflows/deploy.yml
-    needs: lint
-    with:
-      environmentType: Test
-      resourceGroupName: ${{ variable.resourceGroupName }}
-      laResourceGroup: DefaultResourceGroup-WEU
-      laName: DefaultWorkspace-30483fd2-311e-4847-81bf-4fa79f8f8f44-WEU
-      workspaceId: ab431c8494a14886aa0576f01ea23b5a
+#  deploy-test:
+#    uses: ./.github/workflows/deploy.yml
+#    needs: lint
+#    with:
+#      environmentType: Test
+#      resourceGroupName: ${{ env.resourceGroupName }}
+#      laResourceGroup: ${{ env.laResourceGroup }}
+#      laName: ${{ env.laName }}
+#      workspaceId: ${{ env.workspaceId }}
