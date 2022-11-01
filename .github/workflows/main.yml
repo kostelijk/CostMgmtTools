@@ -28,7 +28,7 @@ jobs:
     needs: lint
     with:
       environmentType: Test
-      resourceGroupName: '${{ env.resourceGroupName }}Test'
-      laResourceGroup: '${{ env.laResourceGroup }}'
-      laName: ${{ env.laName }}
-      workspaceId: ${{ env.workspaceId }}
+      resourceGroupName: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}Test'
+      laResourceGroup: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+      laName: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+      workspaceId: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
