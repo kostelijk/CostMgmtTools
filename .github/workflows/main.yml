@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/azure/functions-action
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Azure Function App
+name: Deploy Log Running VMs end-to-end
 
 on:
   push:
@@ -21,4 +21,14 @@ jobs:
   # Lint the Bicep file.
   lint:
     uses: ./.github/workflows/lint.yml
-    
+
+  # Deploy to the test environment.
+  deploy-test:
+    uses: ./.github/workflows/deploy.yml
+    needs: lint
+    with:
+      environmentType: Test
+      resourceGroupName: '${{ env.resourceGroupName }}Test'
+      laResourceGroup: '${{ env.laResourceGroup }}'
+      laName: ${{ env.laName }}
+      workspaceId: ${{ env.workspaceId }}
