@@ -11,10 +11,16 @@ on:
 
 env:
     AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
-    resourceGroupName: RG-VMCountFADev
-    laResourceGroup: DefaultResourceGroup-WEU
-    laName: DefaultWorkspace-30483fd2-311e-4847-81bf-4fa79f8f8f44-WEU
-    workspaceId: ab431c8494a14886aa0576f01ea23b5a
+
+variable:
+    - name: resourceGroupName
+      value: RG-VMCountFADev
+    - name: laResourceGroup
+      value: DefaultResourceGroup-WEU
+    - name: laName
+      value: DefaultWorkspace-30483fd2-311e-4847-81bf-4fa79f8f8f44-WEU
+    - name: workspaceId
+      value: ab431c8494a14886aa0576f01ea23b5a
 
 jobs:
 
@@ -28,7 +34,7 @@ jobs:
     needs: lint
     with:
       environmentType: Test
-      resourceGroupName: env.resourceGroupName
+      resourceGroupName: ${{ variable.resourceGroupName }}
       laResourceGroup: DefaultResourceGroup-WEU
       laName: DefaultWorkspace-30483fd2-311e-4847-81bf-4fa79f8f8f44-WEU
       workspaceId: ab431c8494a14886aa0576f01ea23b5a
