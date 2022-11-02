@@ -20,12 +20,57 @@ on:
         type: string
 
 jobs:
-  say-hello:
+  validate:
+     runs-on: ubuntu-latest
+     steps: 
+     - uses: actions/checkout@v2
+     - if: inputs.environmentType != 'Production'
+       uses: azure/arm-deploy@v1
+       name: Run preflight validation
+       with:
+         deploymentName: ${{ github.run_number }}
+         resourceGroupName: ${{ inputs.resourceGroupName }}
+         template: ./Deploy/main.bicep
+         parameters: >
+           environmentType=${{ inputs.environmentType }}
+           laResourceGroup=${{ inputs.laResourceGroup }}
+           laName=${{ inputs.laName }}
+           workspaceId=${{ inputs.workspaceId }}
+         deploymentMode: Validate
+     - if: inputs.environmentType == 'Production'
+       uses: azure/arm-deploy@v1
+       name: Run what-if
+       with:
+         failOnStdErr: false
+         resourceGroupName: ${{ inputs.resourceGroupName }}
+         template: ./Deploy/main.bicep
+         parameters: >
+           environmentType=${{ inputs.environmentType }}
+           laResourceGroup=${{ inputs.laResourceGroup }}
+           laName=${{ inputs.laName }}
+           workspaceId=${{ inputs.workspaceId }}
+         additionalArguments: --what-if
+ 
+  deploy:
+    needs: validate
+    environment: ${{ inputs.environmentType }}
     runs-on: ubuntu-latest
+    outputs:
+      appServiceAppName: ${{ steps.deploy.outputs.appServiceAppName}}
+      appServiceAppHostName: ${{ steps.deploy.outputs.appServiceAppHostName }}
+      storageAccountName: ${{ steps.deploy.outputs.storageAccountName }}
     steps:
-      - name: 'Run a one-line command'
-        run: echo "hello from GitHub Actions"
-      - name: 'Run a multi-line command'
-        run: |
-          echo "We'll add more steps soon."
-          echo "For example, we'll add our Bicep deployment step."
+    - uses: actions/checkout@v2
+    - uses: azure/arm-deploy@v1
+      id: deploy
+      name: Deploy Bicep file
+      with:
+        failOnStdErr: false
+        deploymentName: ${{ github.run_number }}
+        resourceGroupName: ${{ inputs.resourceGroupName }}
+        template: ./Deploy/main.bicep
+        parameters: >
+           environmentType=${{ inputs.environmentType }}
+           laResourceGroup=${{ inputs.laResourceGroup }}
+           laName=${{ inputs.laName }}
+           workspaceId=${{ inputs.workspaceId }}
