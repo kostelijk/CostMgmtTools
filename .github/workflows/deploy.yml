@@ -31,7 +31,6 @@ permissions:
   contents: read
 
 jobs:
-
   validate:
      runs-on: ubuntu-latest
      steps: 
@@ -69,12 +68,11 @@ jobs:
  
   deploy:
     needs: validate
-    environment: ${{ inputs.environmentType }}
+#    environment: ${{ inputs.environmentType }}
     runs-on: ubuntu-latest
     outputs:
-      appServiceAppName: ${{ steps.deploy.outputs.appServiceAppName}}
-      appServiceAppHostName: ${{ steps.deploy.outputs.appServiceAppHostName }}
-      storageAccountName: ${{ steps.deploy.outputs.storageAccountName }}
+      dceURI: ${{ steps.deploy.outputs.dceURI }}
+      dcrImmutableId: ${{ steps.deploy.outputs.dcrImmutableId}}
     steps:
     - uses: actions/checkout@v2
     - uses: azure/login@v1
