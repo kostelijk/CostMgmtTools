@@ -20,8 +20,18 @@ on:
         type: string
 
 jobs:
+
+  say-hello:
+    runs-on: windows-latest
+    steps:
+      - name: 'Run a multi-line command'
+        run: |
+          echo "AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}"
+          echo "AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}"
+          echo "AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+
   validate:
-     runs-on: ubuntu-latest
+     runs-on: windows-latest
      steps: 
      - uses: actions/checkout@v2
      - uses: azure/login@v1
@@ -60,7 +70,7 @@ jobs:
   deploy:
     needs: validate
     environment: ${{ inputs.environmentType }}
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     outputs:
       appServiceAppName: ${{ steps.deploy.outputs.appServiceAppName}}
       appServiceAppHostName: ${{ steps.deploy.outputs.appServiceAppHostName }}

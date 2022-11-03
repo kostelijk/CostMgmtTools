@@ -18,17 +18,6 @@ jobs:
   lint:
     uses: ./.github/workflows/lint.yml
 
-  say-hello:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Run a one-line command'
-        run: echo "hello from GitHub Actions"
-      - name: 'Run a multi-line command'
-        run: |
-          echo "We'll add more steps soon."
-          echo "For example, we'll add our Bicep deployment step."
-          echo ${{ env.workspaceId }}
-
   # Deploy to the test environment.
   deploy-test:
     uses: ./.github/workflows/deploy.yml
