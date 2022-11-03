@@ -50,7 +50,6 @@ jobs:
          resourceGroupName: ${{ inputs.resourceGroupName }}
          template: ./Deploy/main.bicep
          parameters: >
-           environmentType=${{ inputs.environmentType }}
            laResourceGroup=${{ inputs.laResourceGroup }}
            laName=${{ inputs.laName }}
            workspaceId=${{ inputs.workspaceId }}
@@ -63,7 +62,6 @@ jobs:
          resourceGroupName: ${{ inputs.resourceGroupName }}
          template: ./Deploy/main.bicep
          parameters: >
-           environmentType=${{ inputs.environmentType }}
            laResourceGroup=${{ inputs.laResourceGroup }}
            laName=${{ inputs.laName }}
            workspaceId=${{ inputs.workspaceId }}
@@ -94,7 +92,6 @@ jobs:
         resourceGroupName: ${{ inputs.resourceGroupName }}
         template: ./Deploy/main.bicep
         parameters: >
-           environmentType=${{ inputs.environmentType }}
            laResourceGroup=${{ inputs.laResourceGroup }}
            laName=${{ inputs.laName }}
            workspaceId=${{ inputs.workspaceId }}

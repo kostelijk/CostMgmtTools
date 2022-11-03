@@ -54,7 +54,7 @@ var streamDeclarations = { 'Custom-${customTableName}_CL': {
                             ]
                           }
                         }
-  var workspaceResourceId = resourceId(laResourceGroup,'Microsoft.OperationalInsights/workspaces',laName)
+var workspaceResourceId = resourceId(laResourceGroup,'Microsoft.OperationalInsights/workspaces',laName)
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-08-01' = {
   name: storageAccountName
