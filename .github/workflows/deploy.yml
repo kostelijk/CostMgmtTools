@@ -33,7 +33,7 @@ permissions:
 jobs:
 
   validate:
-     runs-on: windows-latest
+     runs-on: ubuntu-latest
      steps: 
      - uses: actions/checkout@v2
      - uses: azure/login@v1
@@ -72,7 +72,7 @@ jobs:
   deploy:
     needs: validate
     environment: ${{ inputs.environmentType }}
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     outputs:
       appServiceAppName: ${{ steps.deploy.outputs.appServiceAppName}}
       appServiceAppHostName: ${{ steps.deploy.outputs.appServiceAppHostName }}
