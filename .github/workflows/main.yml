@@ -6,7 +6,7 @@ name: Deploy Log Running VMs end-to-end
 on:
   push:
     branches:
-      - Dev
+      - main
   workflow_dispatch:
 
 jobs:
