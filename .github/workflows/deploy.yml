@@ -34,7 +34,7 @@ jobs:
   validate:
      runs-on: ubuntu-latest
      steps: 
-     - uses: actions/checkout@v2
+     - uses: actions/checkout@v3
      - uses: azure/login@v1
        name: Sign in to Azure
        with:
@@ -74,7 +74,7 @@ jobs:
       dceURI: ${{ steps.deploy.outputs.dceURI }}
       dcrImmutableId: ${{ steps.deploy.outputs.dcrImmutableId}}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: azure/login@v1
       name: Sign in to Azure
       with:
