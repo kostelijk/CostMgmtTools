@@ -74,7 +74,6 @@ jobs:
       dceURI: ${{ steps.deploy.outputs.dceURI }}
       dcrImmutableId: ${{ steps.deploy.outputs.dcrImmutableId }}
       functionAppName: ${{ steps.deploy.outputs.functionAppName }}
-      publishingProfile: ${{ steps.getPublishingProfile.publishingProfile }}
     steps:
     - uses: actions/checkout@v3
     - uses: azure/login@v1
@@ -100,7 +99,7 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          $publishingProfile = Get-AzWebAppPublishingProfile -ResourceGroupName ${{ inputs.resourceGroupName }} -Name ${{ needs.deploy.outputs.functionAppName }}
+          $publishingProfile = Get-AzWebAppPublishingProfile -ResourceGroupName ${{ inputs.resourceGroupName }} -Name ${{ deploy.outputs.functionAppName }}
           echo "publishingProfile=$publishingProfile" >> $GITHUB_OUTPUT
         azPSVersion: "latest"
 
