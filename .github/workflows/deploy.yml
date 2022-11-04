@@ -117,5 +117,5 @@ jobs:
         with:
           app-name: ${{ needs.deploy.outputs.functionAppName }}
           slot-name: 'Production'
-          package: '.' #${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+          package: '.' # ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
           publish-profile: ${{ needs.deploy.outputs.publishingProfile }}
