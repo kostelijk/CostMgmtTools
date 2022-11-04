@@ -95,14 +95,14 @@ jobs:
            laResourceGroup=${{ inputs.laResourceGroup }}
            laName=${{ inputs.laName }}
            workspaceId=${{ inputs.workspaceId }}
-      - name: Run Azure PowerShell script
-        id: getPublishingProfile
-        uses: azure/powershell@v1
-        with:
-          inlineScript: |
-            $publishingProfile = Get-AzWebAppPublishingProfile -ResourceGroupName ${{ inputs.resourceGroupName }} -Name ${{ needs.deploy.outputs.functionAppName }}
-            echo "publishingProfile=$publishingProfile" >> $GITHUB_OUTPUT
-          azPSVersion: "latest"
+    - name: Run Azure PowerShell script
+      id: getPublishingProfile
+      uses: azure/powershell@v1
+      with:
+        inlineScript: |
+          $publishingProfile = Get-AzWebAppPublishingProfile -ResourceGroupName ${{ inputs.resourceGroupName }} -Name ${{ needs.deploy.outputs.functionAppName }}
+          echo "publishingProfile=$publishingProfile" >> $GITHUB_OUTPUT
+        azPSVersion: "latest"
 
 
   deploy-fa:
