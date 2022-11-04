@@ -71,9 +71,9 @@ jobs:
 #    environment: ${{ inputs.environmentType }}
     runs-on: ubuntu-latest
     outputs:
-      dceURI: ${{ steps.deploy.outputs.dceURI }}
-      dcrImmutableId: ${{ steps.deploy.outputs.dcrImmutableId }}
-      functionAppName: ${{ steps.deploy.outputs.functionAppName }}
+      dceURI: ${{ steps.deployBicep.outputs.dceURI }}
+      dcrImmutableId: ${{ steps.deployBicep.outputs.dcrImmutableId }}
+      functionAppName: ${{ steps.deployBicep.outputs.functionAppName }}
     steps:
     - uses: actions/checkout@v3
     - uses: azure/login@v1
@@ -83,7 +83,7 @@ jobs:
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
     - uses: azure/arm-deploy@v1
-      id: deploy
+      id: deployBicep
       name: Deploy Bicep file
       with:
         failOnStdErr: false
@@ -99,7 +99,7 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          $publishingProfile = Get-AzWebAppPublishingProfile -ResourceGroupName ${{ inputs.resourceGroupName }} -Name ${{ job.deploy.outputs.functionAppName }}
+          $publishingProfile = Get-AzWebAppPublishingProfile -ResourceGroupName ${{ inputs.resourceGroupName }} -Name ${{ steps.deployBicep.outputs.functionAppName }}
           echo "publishingProfile=$publishingProfile" >> $GITHUB_OUTPUT
         azPSVersion: "latest"
 
