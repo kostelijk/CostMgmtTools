@@ -118,4 +118,4 @@ jobs:
           app-name: ${{ needs.deploy.outputs.functionAppName }}
           slot-name: 'Production'
           package: '.' # ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-          publish-profile: ${{ needs.deploy.outputs.publishingProfile }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_092C07438EA145F393206E3751F61908 }} # ${{ needs.deploy.outputs.publishingProfile }}
