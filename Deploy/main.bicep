@@ -199,3 +199,4 @@ resource dataCollectionRule 'Microsoft.Insights/dataCollectionRules@2021-09-01-p
 
 output dceURI string = dataCollectionEndpoint.properties.logsIngestion.endpoint
 output dcrImmutableId string = dataCollectionRule.properties.immutableId
+output functionAppName string = functionApp.name

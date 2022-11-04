@@ -72,7 +72,9 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       dceURI: ${{ steps.deploy.outputs.dceURI }}
-      dcrImmutableId: ${{ steps.deploy.outputs.dcrImmutableId}}
+      dcrImmutableId: ${{ steps.deploy.outputs.dcrImmutableId }}
+      functionAppName: ${{ steps.deploy.outpus.funtcionAppName }}
+      publishingProfile: ${{ steps.getPublishingProfile.publishingProfile }}
     steps:
     - uses: actions/checkout@v3
     - uses: azure/login@v1
@@ -93,3 +95,27 @@ jobs:
            laResourceGroup=${{ inputs.laResourceGroup }}
            laName=${{ inputs.laName }}
            workspaceId=${{ inputs.workspaceId }}
+      - name: Run Azure PowerShell script
+        id: getPublishingProfile
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+            $publishingProfile = Get-AzWebAppPublishingProfile -ResourceGroupName ${{ inputs.resourceGroupName }} -Name ${{ needs.deploy.outputs.functionAppName }}
+            echo "publishingProfile=$publishingProfile" >> $GITHUB_OUTPUT
+          azPSVersion: "latest"
+
+
+  deploy-fa:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v2
+      - name: 'Run Azure Functions Action'
+        uses: Azure/functions-action@v1
+        id: fa
+        with:
+          app-name: ${{ needs.deploy.outputs.functionAppName }}
+          slot-name: 'Production'
+          package: '.' #${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+          publish-profile: ${{ needs.deploy.outputs.publishingProfile }}
