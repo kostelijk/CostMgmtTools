@@ -99,7 +99,7 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          $publishingProfile = Get-AzWebAppPublishingProfile -ResourceGroupName ${{ inputs.resourceGroupName }} -Name ${{ deploy.outputs.functionAppName }}
+          $publishingProfile = Get-AzWebAppPublishingProfile -ResourceGroupName ${{ inputs.resourceGroupName }} -Name ${{ job.deploy.outputs.functionAppName }}
           echo "publishingProfile=$publishingProfile" >> $GITHUB_OUTPUT
         azPSVersion: "latest"
 
