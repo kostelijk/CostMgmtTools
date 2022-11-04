@@ -73,7 +73,7 @@ jobs:
     outputs:
       dceURI: ${{ steps.deploy.outputs.dceURI }}
       dcrImmutableId: ${{ steps.deploy.outputs.dcrImmutableId }}
-      functionAppName: ${{ steps.deploy.outpus.funtcionAppName }}
+      functionAppName: ${{ steps.deploy.outputs.funtcionAppName }}
       publishingProfile: ${{ steps.getPublishingProfile.publishingProfile }}
     steps:
     - uses: actions/checkout@v3
