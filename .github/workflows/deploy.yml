@@ -104,13 +104,9 @@ jobs:
       with:
         inlineScript: |
           Get-AzWebAppPublishingProfile -ResourceGroupName ${{ inputs.resourceGroupName }} -Name ${{ steps.deployBicep.outputs.functionAppName }} -OutVariable publishingProfile
-          write-host "PP: $publishingProfile"
-          write-host "Hello ${{ steps.deploy.outputs.functionAppName }}"
           echo "publishingProfile=$publishingProfile" >> $GITHUB_OUTPUT
           echo "publishingProfile=$publishingProfile"
-          write-host "Hello again ${{ steps.getPublishingProfile.outputs.publishingProfile }}"
           echo ::set-output name=publishingProfile::$($publishingProfile)
-          write-host "Hello again ${{ steps.getPublishingProfile.outputs.publishingProfile }}"
         azPSVersion: "latest"
 
 
@@ -122,8 +118,8 @@ jobs:
         run: |
           echo 'Hello' 
           echo 'Hello: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}'
-          echo 'Hello ${{ needs.deployBicep.outputs.functionAppName }}'
-          echo 'Hello ${{ needs.getPublishingProfile.outputs.publishingProfile }}'
+          echo 'functionAppName ${{ needs.deploy.outputs.functionAppName }}'
+          echo 'PP:  ${{ needs.deploy.outputs.publishingProfile }}'
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@v2
       - name: 'Run Azure Functions Action'
