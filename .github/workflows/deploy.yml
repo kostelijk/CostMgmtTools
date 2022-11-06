@@ -104,8 +104,12 @@ jobs:
       with:
         inlineScript: |
           $publishingProfile = Get-AzWebAppPublishingProfile -ResourceGroupName ${{ inputs.resourceGroupName }} -Name ${{ steps.deployBicep.outputs.functionAppName }}
-          write-host "Hello ${{ steps.deployBicep.outputs.functionAppName }}"
+          write-host "PP: $publishingProfile"
+          write-host "Hello ${{ steps.deploy.outputs.functionAppName }}"
           echo "publishingProfile=$publishingProfile" >> $GITHUB_OUTPUT
+          echo "publishingProfile=$publishingProfile"
+          write-host "Hello again ${{ steps.getPublishingProfile.outputs.publishingProfile }}"
+          echo ::set-output name=publishingProfile::$($publishingProfile)
           write-host "Hello again ${{ steps.getPublishingProfile.outputs.publishingProfile }}"
         azPSVersion: "latest"
 
