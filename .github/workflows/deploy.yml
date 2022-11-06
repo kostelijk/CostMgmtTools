@@ -106,7 +106,7 @@ jobs:
           $publishingProfile = Get-AzWebAppPublishingProfile -ResourceGroupName ${{ inputs.resourceGroupName }} -Name ${{ steps.deployBicep.outputs.functionAppName }}
           write-host "Hello ${{ steps.deployBicep.outputs.functionAppName }}"
           echo "publishingProfile=$publishingProfile" >> $GITHUB_OUTPUT
-          wriet-host "Hello again ${{ steps.getPublishingProfile.outputs.publishingProfile }}"
+          write-host "Hello again ${{ steps.getPublishingProfile.outputs.publishingProfile }}"
         azPSVersion: "latest"
 
 
