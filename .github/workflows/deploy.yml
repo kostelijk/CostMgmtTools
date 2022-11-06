@@ -116,7 +116,7 @@ jobs:
         run: |
           echo 'Hello' 
           echo 'Hello: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}'
-          echo 'Hello ${{ nees.deployBicep.outputs.functionAppName }}'
+          echo 'Hello ${{ needs.deployBicep.outputs.functionAppName }}'
           echo 'Hello ${{ needs.getPublishingProfile.outputs.publishingProfile }}'
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@v2
@@ -124,7 +124,7 @@ jobs:
         uses: Azure/functions-action@v1
         id: fa
         with:
-          app-name: 'fnapp6f7hsy2ymlle2'
+          # app-name: 'fnapp6f7hsy2ymlle2'
           app-name: ${{ needs.deployBicep.outputs.functionAppName }}
           slot-name: 'Production'
           package: '.' # ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
