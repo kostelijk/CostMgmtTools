@@ -103,7 +103,7 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          $publishingProfile = Get-AzWebAppPublishingProfile -ResourceGroupName ${{ inputs.resourceGroupName }} -Name ${{ steps.deployBicep.outputs.functionAppName }}
+          Get-AzWebAppPublishingProfile -ResourceGroupName ${{ inputs.resourceGroupName }} -Name ${{ steps.deployBicep.outputs.functionAppName }} -OutVariable publishingProfile
           write-host "PP: $publishingProfile"
           write-host "Hello ${{ steps.deploy.outputs.functionAppName }}"
           echo "publishingProfile=$publishingProfile" >> $GITHUB_OUTPUT
