@@ -104,13 +104,15 @@ jobs:
       with:
         inlineScript: |
           $publishingProfile = Get-AzWebAppPublishingProfile -ResourceGroupName ${{ inputs.resourceGroupName }} -Name ${{ steps.deployBicep.outputs.functionAppName }}
+          write-host "Hello ${{ steps.deployBicep.outputs.functionAppName }}"
           echo "publishingProfile=$publishingProfile" >> $GITHUB_OUTPUT
+          wriet-host "Hello again ${{ steps.getPublishingProfile.outputs.publishingProfile }}"
         azPSVersion: "latest"
 
 
   deploy-fa:
     needs: deploy
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: 'Echo'
         run: |
@@ -125,8 +127,8 @@ jobs:
         id: fa
         with:
           # app-name: 'fnapp6f7hsy2ymlle2'
-          app-name: ${{ needs.deployBicep.outputs.functionAppName }}
+          app-name: ${{ needs.deploy.outputs.functionAppName }}
           slot-name: 'Production'
           package: '.' # ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
           # publish-profile: '${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}'
-          publish-profile: ${{ needs.getPublishingProfile.outputs.publishingProfile }}
+          publish-profile: ${{ needs.deploy.outputs.publishingProfile }}
