@@ -100,20 +100,10 @@ jobs:
            laResourceGroup=${{ inputs.laResourceGroup }}
            laName=${{ inputs.laName }}
            workspaceId=${{ inputs.workspaceId }}
-    - name: Run Azure PowerShell script
-      id: getPublishingProfile
-      uses: azure/powershell@v1
-      with:
-        inlineScript: |
-          $publishingProfile = Get-AzWebAppPublishingProfile -ResourceGroupName ${{ inputs.resourceGroupName }} -Name ${{ steps.deployBicep.outputs.functionAppName }}
-          echo publishingProfile=$publishingProfile >> $GITHUB_OUTPUT
-          echo "test1=test1" >> $GITHUB_OUTPUT
-          echo ::set-output name=test2::Test2
-        azPSVersion: "latest"
     - name: Run Azure CLI script
-      id: getPublishingProfile2
+      id: getPublishingProfile
       run: |
-        az webapp deployment list-publishing-profiles --resource-group ${{ inputs.resourceGroupName }} --name ${{ steps.deployBicep.outputs.functionAppName }} --xml
+        echo publishingProfile=$(az webapp deployment list-publishing-profiles --resource-group ${{ inputs.resourceGroupName }} --name ${{ steps.deployBicep.outputs.functionAppName }} --xml) >> $GITHUB_OUTPUT
 
 
   deploy-fa:
