@@ -46,7 +46,18 @@ jobs:
          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
      - if: inputs.environmentType != 'Production'
        uses: azure/arm-deploy@v1
-       name: Run preflight validation
+       name: Run preflight validation table.bicep
+       with:
+         deploymentName: ${{ github.run_number }}
+         resourceGroupName: ${{ inputs.laResourceGroup }}
+         template: ./Deploy/table.bicep
+         parameters: >
+            resourceGroupName=${{ inputs.laResourceGroup }}
+            laName=${{ inputs.laName }}
+            workspaceId=${{ inputs.workspaceId }}
+         deploymentMode: Validate
+       uses: azure/arm-deploy@v1
+       name: Run preflight validation main.bicep
        with:
          deploymentName: ${{ github.run_number }}
          resourceGroupName: ${{ inputs.resourceGroupName }}
@@ -59,7 +70,18 @@ jobs:
          deploymentMode: Validate
      - if: inputs.environmentType == 'Production'
        uses: azure/arm-deploy@v1
-       name: Run what-if
+       name: Run what-if table.bicep
+       with:
+         failOnStdErr: false
+         resourceGroupName: ${{ inputs.laResourceGroup }}
+         template: ./Deploy/table.bicep
+         parameters: >
+            resourceGroupName=${{ inputs.laResourceGroup }}
+            laName=${{ inputs.laName }}
+            workspaceId=${{ inputs.workspaceId }}
+         additionalArguments: --what-if
+       uses: azure/arm-deploy@v1
+       name: Run what-if main.bicep
        with:
          failOnStdErr: false
          resourceGroupName: ${{ inputs.resourceGroupName }}
@@ -90,8 +112,20 @@ jobs:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         enable-AzPSSession: true
     - uses: azure/arm-deploy@v1
+      id: deploytableBicep
+      name: Deploy table Bicep file
+      with:
+        failOnStdErr: false
+        deploymentName: ${{ github.run_number }}
+        resourceGroupName: ${{ inputs.laResourceGroup }}
+        template: ./Deploy/main.bicep
+        parameters: >
+            resourceGroupName=${{ inputs.laResourceGroup }}
+            laName=${{ inputs.laName }}
+            workspaceId=${{ inputs.workspaceId }}
+    - uses: azure/arm-deploy@v1
       id: deployBicep
-      name: Deploy Bicep file
+      name: Deploy main Bicep file
       with:
         failOnStdErr: false
         deploymentName: ${{ github.run_number }}
