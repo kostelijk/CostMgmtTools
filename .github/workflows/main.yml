@@ -22,6 +22,7 @@ jobs:
     with:
       environmentType: Test
       resourceGroupName: RG-FA-LOGVM-TST
+      faName: kostoso-logvm-tst
       laResourceGroup: DefaultResourceGroup-WEU
       laName: DefaultWorkspace-30483fd2-311e-4847-81bf-4fa79f8f8f44-WEU
       workspaceId: ab431c8494a14886aa0576f01ea23b5a
@@ -30,3 +31,19 @@ jobs:
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       AZURE_FUNCTIONAPP_PUBLISH_PROFILE: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+
+  # Deploy to the Production environment.
+  deploy-production:
+    uses: ./.github/workflows/deploy.yml
+    needs: [lint,deploy-test]
+    with:
+      environmentType: Production
+      resourceGroupName: RG-FA-LOGVM-PRD
+      faName: kostoso-logvm-prd
+      laResourceGroup: rg-loganalytics
+      laName: LAKostoso
+      workspaceId: 70df881d4f1542b98ce1a281ee4f1124
+    secrets:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
