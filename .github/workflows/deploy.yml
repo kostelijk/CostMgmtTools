@@ -52,7 +52,6 @@ jobs:
          resourceGroupName: ${{ inputs.laResourceGroup }}
          template: ./Deploy/table.bicep
          parameters: >
-            resourceGroupName=${{ inputs.laResourceGroup }}
             laName=${{ inputs.laName }}
             workspaceId=${{ inputs.workspaceId }}
          deploymentMode: Validate
@@ -77,7 +76,6 @@ jobs:
          resourceGroupName: ${{ inputs.laResourceGroup }}
          template: ./Deploy/table.bicep
          parameters: >
-            resourceGroupName=${{ inputs.laResourceGroup }}
             laName=${{ inputs.laName }}
             workspaceId=${{ inputs.workspaceId }}
          additionalArguments: --what-if
@@ -120,9 +118,8 @@ jobs:
         failOnStdErr: false
         deploymentName: ${{ github.run_number }}
         resourceGroupName: ${{ inputs.laResourceGroup }}
-        template: ./Deploy/main.bicep
+        template: ./Deploy/table.bicep
         parameters: >
-            resourceGroupName=${{ inputs.laResourceGroup }}
             laName=${{ inputs.laName }}
             workspaceId=${{ inputs.workspaceId }}
     - uses: azure/arm-deploy@v1
