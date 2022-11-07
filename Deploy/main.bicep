@@ -32,8 +32,8 @@ var runtime = 'powershell'
 var functionWorkerRuntime = runtime
 var dceName = 'LogRunningVMs'
 var dcrName = 'CollectRunningVMs'
-var customTableName_CL = '${customTableName}_CL'
-var streamDeclarations = { '${customTableName}_CL': {
+var customTableName_CL = 'Custom-${customTableName}_CL'
+var streamDeclarations = { 'Custom-${customTableName}_CL': {
                             columns: [
                               {
                                   name: 'TimeGenerated'

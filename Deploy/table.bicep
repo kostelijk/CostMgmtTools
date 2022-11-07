@@ -4,14 +4,12 @@ param laName string = 'DefaultWorkspace-30483fd2-311e-4847-81bf-4fa79f8f8f44-WEU
 @description('Custom Table Name (without _CL)')
 param customTableName string = 'RunningVMs'
 
-var customTableName_CL = '${customTableName}_CL'
-
 resource runningVMTable 'Microsoft.OperationalInsights/workspaces/tables@2021-12-01-preview' = {
-  name: '${laName}/${customTableName_CL}'
+  name: '${laName}/${customTableName}_CL'
   properties: {
     plan: 'Analytics'
     schema: {
-      name: 'RunningVMs_CL'
+      name: '${customTableName}_CL'
       columns: [
         {
           name: 'TimeGenerated'
