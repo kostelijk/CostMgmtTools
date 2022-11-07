@@ -77,8 +77,7 @@ jobs:
       dcrImmutableId: ${{ steps.deployBicep.outputs.dcrImmutableId }}
       functionAppName: ${{ steps.deployBicep.outputs.functionAppName }}
       publishingProfile: ${{ steps.getPublishingProfile.publishingProfile}}
-      test1: ${{ steps.getPublishingProfile.test1}}
-      test2: ${{ steps.getPublishingProfile.test2}}
+      datetime: ${{ steps.getPublishingProfile.datetime}}
     steps:
     - uses: actions/checkout@v3
     - uses: azure/login@v1
@@ -103,8 +102,9 @@ jobs:
     - name: Run Azure CLI script
       id: getPublishingProfile
       run: |
-        echo publishingProfile=$(az webapp deployment list-publishing-profiles --resource-group ${{ inputs.resourceGroupName }} --name ${{ steps.deployBicep.outputs.functionAppName }} --xml) >> $GITHUB_OUTPUT
-        echo publishingProfile=$(az webapp deployment list-publishing-profiles --resource-group ${{ inputs.resourceGroupName }} --name ${{ steps.deployBicep.outputs.functionAppName }} --xml)
+        echo publishingProfile='$(az webapp deployment list-publishing-profiles --resource-group ${{ inputs.resourceGroupName }} --name ${{ steps.deployBicep.outputs.functionAppName }} --xml)' >> $GITHUB_OUTPUT
+        echo publishingProfile='$(az webapp deployment list-publishing-profiles --resource-group ${{ inputs.resourceGroupName }} --name ${{ steps.deployBicep.outputs.functionAppName }} --xml)'
+        echo datetime='$(date)'
 
   deploy-fa:
     needs: deploy
@@ -112,12 +112,8 @@ jobs:
     steps:
       - name: 'Echo'
         run: |
-          echo 'Hello' 
-          echo 'Hello: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}'
-          echo 'functionAppName ${{ needs.deploy.outputs.functionAppName }}'
           echo 'PP:  ${{ needs.deploy.outputs.publishingProfile }}'
-          echo 'output1: ${{ needs.deploy.outputs.test1 }}'
-          echo 'output2: ${{ needs.deploy.outputs.test2 }}'
+          echo 'date: ${{ needs.deploy.outputs.datetime }}'
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@v2
       - name: 'Run Azure Functions Action'
