@@ -52,7 +52,7 @@ jobs:
          resourceGroupName: ${{ inputs.resourceGroupName }}
          template: ./Deploy/main.bicep
          parameters: >
-            faName=${{ inputs.faName }}
+            appName=${{ inputs.faName }}
             laResourceGroup=${{ inputs.laResourceGroup }}
             laName=${{ inputs.laName }}
             workspaceId=${{ inputs.workspaceId }}
@@ -65,9 +65,10 @@ jobs:
          resourceGroupName: ${{ inputs.resourceGroupName }}
          template: ./Deploy/main.bicep
          parameters: >
-           laResourceGroup=${{ inputs.laResourceGroup }}
-           laName=${{ inputs.laName }}
-           workspaceId=${{ inputs.workspaceId }}
+            appName=${{ inputs.faName }}
+            laResourceGroup=${{ inputs.laResourceGroup }}
+            laName=${{ inputs.laName }}
+            workspaceId=${{ inputs.workspaceId }}
          additionalArguments: --what-if
  
   deploy:
@@ -97,9 +98,10 @@ jobs:
         resourceGroupName: ${{ inputs.resourceGroupName }}
         template: ./Deploy/main.bicep
         parameters: >
-           laResourceGroup=${{ inputs.laResourceGroup }}
-           laName=${{ inputs.laName }}
-           workspaceId=${{ inputs.workspaceId }}
+            appName=${{ inputs.faName }}
+            laResourceGroup=${{ inputs.laResourceGroup }}
+            laName=${{ inputs.laName }}
+            workspaceId=${{ inputs.workspaceId }}
     - name: Run Azure CLI script
       id: getPublishingProfile
       run: |
