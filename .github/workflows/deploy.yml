@@ -104,7 +104,7 @@ jobs:
       id: getPublishingProfile
       run: |
         echo publishingProfile=$(az webapp deployment list-publishing-profiles --resource-group ${{ inputs.resourceGroupName }} --name ${{ steps.deployBicep.outputs.functionAppName }} --xml) >> $GITHUB_OUTPUT
-
+        echo publishingProfile=$(az webapp deployment list-publishing-profiles --resource-group ${{ inputs.resourceGroupName }} --name ${{ steps.deployBicep.outputs.functionAppName }} --xml)
 
   deploy-fa:
     needs: deploy
