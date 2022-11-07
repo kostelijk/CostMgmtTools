@@ -102,9 +102,9 @@ jobs:
     - name: Run Azure CLI script
       id: getPublishingProfile
       run: |
-        echo publishingProfile='$(az webapp deployment list-publishing-profiles --resource-group ${{ inputs.resourceGroupName }} --name ${{ steps.deployBicep.outputs.functionAppName }} --xml)' >> $GITHUB_OUTPUT
+        echo publishingProfile=$(az webapp deployment list-publishing-profiles --resource-group ${{ inputs.resourceGroupName }} --name ${{ steps.deployBicep.outputs.functionAppName }} --xml) >> $GITHUB_OUTPUT
         echo publishingProfile='$(az webapp deployment list-publishing-profiles --resource-group ${{ inputs.resourceGroupName }} --name ${{ steps.deployBicep.outputs.functionAppName }} --xml)'
-        echo datetime='$(date)'
+        echo datetime=$(date) >> $GITHUB_OUTPUT
 
   deploy-fa:
     needs: deploy
