@@ -56,6 +56,7 @@ jobs:
             laName=${{ inputs.laName }}
             workspaceId=${{ inputs.workspaceId }}
          deploymentMode: Validate
+     - if: inputs.environmentType != 'Production'
        uses: azure/arm-deploy@v1
        name: Run preflight validation main.bicep
        with:
@@ -80,6 +81,7 @@ jobs:
             laName=${{ inputs.laName }}
             workspaceId=${{ inputs.workspaceId }}
          additionalArguments: --what-if
+     - if: inputs.environmentType == 'Production'
        uses: azure/arm-deploy@v1
        name: Run what-if main.bicep
        with:
