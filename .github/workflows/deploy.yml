@@ -76,8 +76,8 @@ jobs:
       dceURI: ${{ steps.deployBicep.outputs.dceURI }}
       dcrImmutableId: ${{ steps.deployBicep.outputs.dcrImmutableId }}
       functionAppName: ${{ steps.deployBicep.outputs.functionAppName }}
-      publishingProfile: ${{ steps.getPublishingProfile.publishingProfile}}
-      datetime: ${{ steps.getPublishingProfile.datetime}}
+      publishingProfile: ${{ steps.getPublishingProfile.outputs.publishingProfile}}
+      datetime: ${{ steps.getPublishingProfile.outputs.datetime}}
     steps:
     - uses: actions/checkout@v3
     - uses: azure/login@v1
