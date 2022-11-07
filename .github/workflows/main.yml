@@ -40,8 +40,8 @@ jobs:
       resourceGroupName: RG-FA-LOGVM-PRD
       faName: kostoso-logvm-prd
       laResourceGroup: rg-loganalytics
-      laName: LAKostoso
-      workspaceId: 70df881d4f1542b98ce1a281ee4f1124
+      laName: LATest
+      workspaceId: 09f7e607809e4b22b23f74136fc3d501
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
