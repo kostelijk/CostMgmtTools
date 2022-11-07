@@ -197,34 +197,6 @@ resource dataCollectionRule 'Microsoft.Insights/dataCollectionRules@2021-09-01-p
   }
 }
 
-resource runningVMTable 'Microsoft.OperationalInsights/workspaces/tables@2021-12-01-preview' = {
-  name: '${laName}/${customTableName_CL}'
-  properties: {
-    plan: 'Analytics'
-    schema: {
-      name: customTableName_CL
-      columns: [
-        {
-          name: 'TimeGenerated'
-          type: 'datetime'
-        }
-        {
-          name: 'Application'
-          type: 'string'
-        }
-        {
-          name: 'VmSize'
-          type: 'string'
-        }
-        {
-          name: 'Value'
-          type: 'int'
-        }
-      ]
-    }
-  }
-}
-
 output dceURI string = dataCollectionEndpoint.properties.logsIngestion.endpoint
 output dcrImmutableId string = dataCollectionRule.properties.immutableId
 output functionAppName string = appName
