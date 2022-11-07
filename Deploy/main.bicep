@@ -24,6 +24,9 @@ param workspaceId string = 'ab431c8494a14886aa0576f01ea23b5a'
 @description('Custom Table Name (without _CL)')
 param customTableName string = 'RunningVMs'
 
+@description('AzureSubscription IDs is a comma separated list')
+param azureSubscriptionIDs string = '30483fd2-311e-4847-81bf-4fa79f8f8f44,67aa3a00-7f19-49c3-9c46-5d6d3c508072'
+
 var functionAppName = appName
 var hostingPlanName = appName
 var applicationInsightsName = appName
@@ -125,6 +128,10 @@ resource functionApp 'Microsoft.Web/sites@2021-03-01' = {
         {
           name: 'dceURI'
           value: dataCollectionEndpoint.properties.logsIngestion.endpoint
+        }
+        {
+          name: 'AzureSubscription_IDs'
+          value: azureSubscriptionIDs
         }
       ]
       ftpsState: 'FtpsOnly'
