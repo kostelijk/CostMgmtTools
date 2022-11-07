@@ -110,6 +110,10 @@ jobs:
           echo "test1=test1" >> $GITHUB_OUTPUT
           echo ::set-output name=test2::Test2
         azPSVersion: "latest"
+    - name: Run Azure CLI script
+      id: getPublishingProfile2
+      run: |
+        az webapp deployment list-publishing-profiles --resource-group ${{ inputs.resourceGroupName }} --name ${{ steps.deployBicep.outputs.functionAppName }} --xml
 
 
   deploy-fa:
