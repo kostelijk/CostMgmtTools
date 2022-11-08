@@ -21,7 +21,7 @@ jobs:
     needs: lint
     with:
       environmentType: Test
-      mangementGroupId: c493edd7-d41b-49ea-960c-ca7c9cfec95b # Root management Group
+      managementGroupId: c493edd7-d41b-49ea-960c-ca7c9cfec95b # Root management Group
       resourceGroupName: RG-FA-LOGVM-TST
       faName: kostoso-logvm-tst
       laResourceGroup: DefaultResourceGroup-WEU
@@ -38,7 +38,7 @@ jobs:
     needs: [lint,deploy-test]
     with:
       environmentType: Production
-      mangementGroupId: c493edd7-d41b-49ea-960c-ca7c9cfec95b # Root management Group
+      managementGroupId: c493edd7-d41b-49ea-960c-ca7c9cfec95b # Root management Group
       resourceGroupName: RG-FA-LOGVM-PRD
       faName: kostoso-logvm-prd
       laResourceGroup: rg-loganalytics
