@@ -14,3 +14,4 @@ jobs:
       run: |
         az bicep build --file Deploy/main.bicep
         az bicep build --file Deploy/table.bicep
+        az bicep build --file Deploy/roleassignement.bicep

@@ -6,6 +6,9 @@ on:
       environmentType:
         required: true
         type: string
+      managementGroupId:
+        required: true
+        type: string
       resourceGroupName:
         required: true
         type: string
@@ -46,16 +49,6 @@ jobs:
          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
      - if: inputs.environmentType != 'Production'
        uses: azure/arm-deploy@v1
-       name: Run preflight validation table.bicep
-       with:
-         deploymentName: ${{ github.run_number }}
-         resourceGroupName: ${{ inputs.laResourceGroup }}
-         template: ./Deploy/table.bicep
-         parameters: >
-            laName=${{ inputs.laName }}
-         deploymentMode: Validate
-     - if: inputs.environmentType != 'Production'
-       uses: azure/arm-deploy@v1
        name: Run preflight validation main.bicep
        with:
          deploymentName: ${{ github.run_number }}
@@ -67,16 +60,6 @@ jobs:
             laName=${{ inputs.laName }}
             workspaceId=${{ inputs.workspaceId }}
          deploymentMode: Validate
-     - if: inputs.environmentType == 'Production'
-       uses: azure/arm-deploy@v1
-       name: Run what-if table.bicep
-       with:
-         failOnStdErr: false
-         resourceGroupName: ${{ inputs.laResourceGroup }}
-         template: ./Deploy/table.bicep
-         parameters: >
-            laName=${{ inputs.laName }}
-         additionalArguments: --what-if
      - if: inputs.environmentType == 'Production'
        uses: azure/arm-deploy@v1
        name: Run what-if main.bicep
@@ -99,6 +82,7 @@ jobs:
       dceURI: ${{ steps.deployBicep.outputs.dceURI }}
       dcrImmutableId: ${{ steps.deployBicep.outputs.dcrImmutableId }}
       functionAppName: ${{ steps.deployBicep.outputs.functionAppName }}
+      principalId: ${{ steps.deployBicep.outputs.principalId }}
       publishingProfile: ${{ steps.getPublishingProfile.outputs.publishingProfile}}
     steps:
     - uses: actions/checkout@v3
@@ -132,6 +116,19 @@ jobs:
             laResourceGroup=${{ inputs.laResourceGroup }}
             laName=${{ inputs.laName }}
             workspaceId=${{ inputs.workspaceId }}
+    - uses: azure/arm-deploy@v1
+      id: roleAssignement
+      name: Assign RBAC Role
+      with:
+        failOnStdErr: failOnStdErr
+        deploymentName: ${{ github.run_number }}
+        scope: managementgroup
+        managementGroupId: ${{ inputs.managementGroupId }}
+        template: ./Deploy/roleassignement.bicep
+        parameters: >
+          principalType: ServicePrincipal
+          principalId: ${{ steps.deployBicep.outputs.principalId }}
+          roleDefinitionId: acdd72a7-3385-48ef-bd42-f606fba81ae7
     - name: Run Azure CLI script
       id: getPublishingProfile
       run: |
