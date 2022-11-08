@@ -13,5 +13,6 @@ jobs:
     - name: Lint code
       run: |
         az bicep build --file Deploy/main.bicep
-        az bicep build --file Deploy/table.bicep
+        az bicep build --file Deploy/functionappdeployment.bicep
+        az bicep build --file Deploy/customtable.bicep
         az bicep build --file Deploy/roleassignement.bicep

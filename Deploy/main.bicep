@@ -9,7 +9,7 @@ param resourceGroupLocation string = 'westeurope'
 
 // Parameters for calling main module
 @description('The name of the function app that you wish to create.')
-param appName string = 'testapptjk'
+param appName string
 
 @description('Storage Account type')
 @allowed([
