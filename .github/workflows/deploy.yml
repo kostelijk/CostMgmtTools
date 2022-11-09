@@ -6,6 +6,9 @@ on:
       environmentType:
         required: true
         type: string
+      region:
+        required: true
+        type: string
       managementGroupId:
         required: true
         type: string
@@ -55,6 +58,7 @@ jobs:
        name: Run preflight validation main.bicep
        with:
         scope: subscription
+        region: ${{ inputs.region }}
         deploymentName: ${{ github.run_number }}
         subscriptionId: ${{ inputs.subscriptionId }}
         template: ./Deploy/main.bicep
@@ -71,6 +75,7 @@ jobs:
        with:
          failOnStdErr: false
          scope: subscription
+         region: ${{ inputs.region }}
          subscriptionId: ${{ inputs.subscriptionId }}
          deploymentName: ${{ github.run_number }}
          template: ./Deploy/main.bicep
@@ -117,6 +122,7 @@ jobs:
       with:
         failOnStdErr: false
         scope: subscription
+        region: ${{ inputs.region }}
         deploymentName: ${{ github.run_number }}
         subscriptionId: ${{ inputs.subscriptionId }}
         template: ./Deploy/main.bicep
@@ -133,6 +139,7 @@ jobs:
         failOnStdErr: failOnStdErr
         deploymentName: ${{ github.run_number }}
         scope: managementgroup
+        region: ${{ inputs.region }}
         managementGroupId: ${{ inputs.managementGroupId }}
         template: ./Deploy/roleassignement.bicep
         parameters: >

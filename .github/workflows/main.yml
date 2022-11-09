@@ -21,6 +21,7 @@ jobs:
     needs: lint
     with:
       environmentType: Test
+      region: westeurope
       managementGroupId: c493edd7-d41b-49ea-960c-ca7c9cfec95b # Root management Group
       subscriptionId: 30483fd2-311e-4847-81bf-4fa79f8f8f44 # Target Subscription
       resourceGroupName: RG-FA-LOGVM-TST
@@ -39,6 +40,7 @@ jobs:
     needs: [lint,deploy-test]
     with:
       environmentType: Production
+      region: westeurope
       managementGroupId: c493edd7-d41b-49ea-960c-ca7c9cfec95b # Root management Group
       subscriptionId: 30483fd2-311e-4847-81bf-4fa79f8f8f44 # Target Subscription
       resourceGroupName: RG-FA-LOGVM-PRD
