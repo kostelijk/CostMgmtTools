@@ -9,7 +9,7 @@ on:
       managementGroupId:
         required: true
         type: string
-      resourceGroupId:
+      subscriptionId:
         required: true
         type: string
       resourceGroupName:
