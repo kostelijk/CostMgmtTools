@@ -30,6 +30,7 @@ param azureSubscriptionIDs string = '30483fd2-311e-4847-81bf-4fa79f8f8f44,67aa3a
 var functionAppName = appName
 var hostingPlanName = appName
 var applicationInsightsName = appName
+var roleDefinitionID = '3913510d-42f4-4e42-8a64-420c390055eb' // Monitoring Metrics Publisher
 var storageAccountName = '${uniqueString(resourceGroup().id)}azfunctions'
 var runtime = 'powershell'
 var functionWorkerRuntime = runtime
@@ -201,6 +202,14 @@ resource dataCollectionRule 'Microsoft.Insights/dataCollectionRules@2021-09-01-p
         outputStream: customTableName_CL
       }
     ]
+  }
+}
+
+resource RoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(functionAppName,roleDefinitionID,resourceGroup().id)
+  properties: {
+    roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionID)
+    principalId: functionApp.identity.principalId
   }
 }
 
