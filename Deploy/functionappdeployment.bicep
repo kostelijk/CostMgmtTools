@@ -123,7 +123,7 @@ resource functionApp 'Microsoft.Web/sites@2021-03-01' = {
           value: '~7'
         }
         {
-          name: 'dcrImmutalbeId'
+          name: 'dcrImmutableId'
           value: dataCollectionRule.properties.immutableId
         }
         {

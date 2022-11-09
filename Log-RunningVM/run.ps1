@@ -15,9 +15,6 @@ $DceURI = $env:DceURI
 $DcrImmutableId = $env:DcrImmutableId
 $Table = "RunningVMs_CL"
 
-Import-Module Az.Acounts -verbose
-Import-Module Az.Compute -Verbose
-
 # Function App needs to logon with MI to be able to query subscriptions
 Connect-AzAccount -Identity
 
@@ -61,8 +58,8 @@ foreach($subscription in $subscriptions){
 
             # Let's see how the response looks like
             Write-Host $uploadResponse
+            Write-Host "URI: $uri"
             Write-Host "-------******---------"
-            Write-Host $log_entry
         }
     } 
 
