@@ -63,7 +63,7 @@ jobs:
         subscriptionId: ${{ inputs.subscriptionId }}
         template: ./Deploy/main.bicep
         parameters: >
-          resourceGroupName: ${{ inputs.resourceGroupName }}
+          resourceGroupName=${{ inputs.resourceGroupName }}
           appName=${{ inputs.faName }}
           laResourceGroup=${{ inputs.laResourceGroup }}
           laName=${{ inputs.laName }}
@@ -80,7 +80,7 @@ jobs:
          deploymentName: ${{ github.run_number }}
          template: ./Deploy/main.bicep
          parameters: >
-            resourceGroupName: ${{ inputs.resourceGroupName }}
+            resourceGroupName=${{ inputs.resourceGroupName }}
             appName=${{ inputs.faName }}
             laResourceGroup=${{ inputs.laResourceGroup }}
             laName=${{ inputs.laName }}
@@ -127,7 +127,7 @@ jobs:
         subscriptionId: ${{ inputs.subscriptionId }}
         template: ./Deploy/main.bicep
         parameters: >
-            resourceGroupName: ${{ inputs.resourceGroupName }}
+            resourceGroupName=${{ inputs.resourceGroupName }}
             appName=${{ inputs.faName }}
             laResourceGroup=${{ inputs.laResourceGroup }}
             laName=${{ inputs.laName }}
