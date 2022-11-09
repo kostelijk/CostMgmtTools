@@ -113,7 +113,7 @@ jobs:
         failOnStdErr: false
         deploymentName: ${{ github.run_number }}
         resourceGroupName: ${{ inputs.laResourceGroup }}
-        template: ./Deploy/table.bicep
+        template: ./Deploy/customtable.bicep
         parameters: >
             laName=${{ inputs.laName }}
     - uses: azure/arm-deploy@v1
