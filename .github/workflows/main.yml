@@ -22,6 +22,7 @@ jobs:
     with:
       environmentType: Test
       managementGroupId: c493edd7-d41b-49ea-960c-ca7c9cfec95b # Root management Group
+      subscriptionId: 30483fd2-311e-4847-81bf-4fa79f8f8f44 # Target Subscription
       resourceGroupName: RG-FA-LOGVM-TST
       faName: kostoso-logvm-tst
       laResourceGroup: DefaultResourceGroup-WEU
@@ -39,6 +40,7 @@ jobs:
     with:
       environmentType: Production
       managementGroupId: c493edd7-d41b-49ea-960c-ca7c9cfec95b # Root management Group
+      subscriptionId: 30483fd2-311e-4847-81bf-4fa79f8f8f44 # Target Subscription
       resourceGroupName: RG-FA-LOGVM-PRD
       faName: kostoso-logvm-prd
       laResourceGroup: rg-loganalytics

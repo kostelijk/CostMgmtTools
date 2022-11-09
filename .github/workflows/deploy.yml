@@ -9,6 +9,9 @@ on:
       managementGroupId:
         required: true
         type: string
+      resourceGroupId:
+        required: true
+        type: string
       resourceGroupName:
         required: true
         type: string
@@ -51,23 +54,28 @@ jobs:
        uses: azure/arm-deploy@v1
        name: Run preflight validation main.bicep
        with:
-         deploymentName: ${{ github.run_number }}
-         resourceGroupName: ${{ inputs.resourceGroupName }}
-         template: ./Deploy/main.bicep
-         parameters: >
-            appName=${{ inputs.faName }}
-            laResourceGroup=${{ inputs.laResourceGroup }}
-            laName=${{ inputs.laName }}
-            workspaceId=${{ inputs.workspaceId }}
-         deploymentMode: Validate
+        scope: subscription
+        deploymentName: ${{ github.run_number }}
+        subscriptionId: ${{ inputs.subscriptionId }}
+        template: ./Deploy/main.bicep
+        parameters: >
+          resourceGroupName: ${{ inputs.resourceGroupName }}
+          appName=${{ inputs.faName }}
+          laResourceGroup=${{ inputs.laResourceGroup }}
+          laName=${{ inputs.laName }}
+          workspaceId=${{ inputs.workspaceId }}
+        deploymentMode: Validate
      - if: inputs.environmentType == 'Production'
        uses: azure/arm-deploy@v1
        name: Run what-if main.bicep
        with:
          failOnStdErr: false
-         resourceGroupName: ${{ inputs.resourceGroupName }}
+         scope: subscription
+         subscriptionId: ${{ inputs.subscriptionId }}
+         deploymentName: ${{ github.run_number }}
          template: ./Deploy/main.bicep
          parameters: >
+            resourceGroupName: ${{ inputs.resourceGroupName }}
             appName=${{ inputs.faName }}
             laResourceGroup=${{ inputs.laResourceGroup }}
             laName=${{ inputs.laName }}
@@ -108,10 +116,12 @@ jobs:
       name: Deploy main Bicep file
       with:
         failOnStdErr: false
+        scope: subscription
         deploymentName: ${{ github.run_number }}
-        resourceGroupName: ${{ inputs.resourceGroupName }}
+        subscriptionId: ${{ inputs.subscriptionId }}
         template: ./Deploy/main.bicep
         parameters: >
+            resourceGroupName: ${{ inputs.resourceGroupName }}
             appName=${{ inputs.faName }}
             laResourceGroup=${{ inputs.laResourceGroup }}
             laName=${{ inputs.laName }}
