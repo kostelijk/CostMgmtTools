@@ -143,9 +143,9 @@ jobs:
         managementGroupId: ${{ inputs.managementGroupId }}
         template: ./Deploy/roleassignement.bicep
         parameters: >
-          principalType: ServicePrincipal
-          principalId: ${{ steps.deployBicep.outputs.principalId }}
-          roleDefinitionId: acdd72a7-3385-48ef-bd42-f606fba81ae7
+          principalType=ServicePrincipal
+          principalId=${{ steps.deployBicep.outputs.principalId }}
+          roleDefinitionId=acdd72a7-3385-48ef-bd42-f606fba81ae7
     - name: Run Azure CLI script
       id: getPublishingProfile
       run: |
