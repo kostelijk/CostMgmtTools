@@ -5,7 +5,7 @@ targetScope='subscription'
 param resourceGroupName string
 
 @description('Region')
-param resourceGroupLocation string = 'westeurope'
+param resourceGroupLocation string
 
 // Parameters for calling main module
 @description('The name of the function app that you wish to create.')
@@ -20,19 +20,19 @@ param appName string
 param storageAccountType string = 'Standard_LRS'
 
 @description('Log Analytics Workspace name')
-param laName string = 'DefaultWorkspace-30483fd2-311e-4847-81bf-4fa79f8f8f44-WEU'
+param laName string
 
 @description('Log Analytics Resource Group name')
-param laResourceGroup string = 'DefaultResourceGroup-WEU'
+param laResourceGroup string
 
 @description('Log Analytics Workspace ID')
-param workspaceId string = 'ab431c8494a14886aa0576f01ea23b5a'
+param workspaceId string
 
 @description('Custom Table Name (without _CL)')
 param customTableName string = 'RunningVMs'
 
 @description('AzureSubscription IDs is a comma separated list')
-param azureSubscriptionIDs string = '30483fd2-311e-4847-81bf-4fa79f8f8f44,67aa3a00-7f19-49c3-9c46-5d6d3c508072'
+param azureSubscriptionIDs string
 
 
 resource FunctionAppRG 'Microsoft.Resources/resourceGroups@2021-01-01' = {

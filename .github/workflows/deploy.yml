@@ -30,6 +30,9 @@ on:
       workspaceId:
         required: true
         type: string
+      subscriptionsToMonitor:
+        required: true
+        type: string
     secrets:
       AZURE_CLIENT_ID:
         required: true
@@ -68,6 +71,8 @@ jobs:
           laResourceGroup=${{ inputs.laResourceGroup }}
           laName=${{ inputs.laName }}
           workspaceId=${{ inputs.workspaceId }}
+          resourceGroupLocation=${{ inputs.region }}
+          azureSubscriptionIDs=${{ inputs.subscriptionsToMonitor}}
         deploymentMode: Validate
      - if: inputs.environmentType == 'Production'
        uses: azure/arm-deploy@v1
@@ -85,6 +90,8 @@ jobs:
             laResourceGroup=${{ inputs.laResourceGroup }}
             laName=${{ inputs.laName }}
             workspaceId=${{ inputs.workspaceId }}
+            resourceGroupLocation=${{ inputs.region }}
+            azureSubscriptionIDs=${{ inputs.subscriptionsToMonitor}}
          additionalArguments: --what-if
  
   deploy:
@@ -132,7 +139,9 @@ jobs:
             laResourceGroup=${{ inputs.laResourceGroup }}
             laName=${{ inputs.laName }}
             workspaceId=${{ inputs.workspaceId }}
-    - uses: azure/arm-deploy@v1
+            resourceGroupLocation=${{ inputs.region }}
+            azureSubscriptionIDs=${{ inputs.subscriptionsToMonitor}}
+  - uses: azure/arm-deploy@v1
       id: roleAssignement
       name: Assign RBAC Role
       with:

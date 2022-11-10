@@ -29,6 +29,7 @@ jobs:
       laResourceGroup: DefaultResourceGroup-WEU
       laName: DefaultWorkspace-30483fd2-311e-4847-81bf-4fa79f8f8f44-WEU
       workspaceId: ab431c8494a14886aa0576f01ea23b5a
+      subscriptionsToMonitor: '30483fd2-311e-4847-81bf-4fa79f8f8f44,67aa3a00-7f19-49c3-9c46-5d6d3c508072'
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
@@ -48,6 +49,7 @@ jobs:
       laResourceGroup: rg-loganalytics
       laName: LATest
       workspaceId: 09f7e607809e4b22b23f74136fc3d501
+      subscriptionsToMonitor: '30483fd2-311e-4847-81bf-4fa79f8f8f44,67aa3a00-7f19-49c3-9c46-5d6d3c508072'
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
