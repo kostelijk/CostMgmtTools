@@ -1,4 +1,4 @@
-@description('Log Analytics Workspace name')
+@description('Log Analytics Workspace name.')
 param laName string = 'DefaultWorkspace-30483fd2-311e-4847-81bf-4fa79f8f8f44-WEU'
 
 @description('Custom Table Name (without _CL)')

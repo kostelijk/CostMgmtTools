@@ -24,7 +24,7 @@ resource roleDefinition 'Microsoft.Authorization/roleDefinitions@2022-04-01' exi
   name: roleDefinitionId
 }
 
-resource RoleAssignment 'Microsoft.Authorization/roleAssignments@2020-10-01-preview' = {
+resource RoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(managementGroup().id, roleDefinitionId, principalId)
   properties: {
     roleDefinitionId: roleDefinition.id

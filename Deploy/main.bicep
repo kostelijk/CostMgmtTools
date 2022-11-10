@@ -4,7 +4,7 @@ targetScope='subscription'
 @description('Target resource group')
 param resourceGroupName string
 
-@description('Region')
+@description('Region (location)')
 param resourceGroupLocation string
 
 // Parameters for calling main module
