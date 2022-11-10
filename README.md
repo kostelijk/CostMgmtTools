@@ -1,11 +1,13 @@
 # CostMgmtTools
 
+This repository is meant to hold tools that can be used for cost management (and learning purposes for myself). The first tool is meant to get insight on how many VMs of a certain type run at any moment. This is especially usefull for machines that are dynamically switched on and of. The logging could help in deciding how to purchase an [Azure Saving plan](https://learn.microsoft.com/en-us/azure/cost-management-billing/savings-plan/).
+
 > :warning: **Warning:**
 > **This deployment is meant for Demo, Test, Learning, Training, Practice or Reproduction purposes ONLY!!**
 > **Please don't deploy to production environments!!**
 
 ## Log-RunningVM
-This Function app reports on how many VM's per VmSize currently are running. This information is logged to a Log Analytics workspace. This is especially usefull for machines that are dynamically switched on and of. The logging could help in deciding how to purchase an Azure Saving plan. 
+This Function app reports on how many VM's per VmSize currently are running. This information is logged to a Log Analytics workspace. 
 
 Information on how to setup Log Analytics, a Data Collection Endpoint and a Data Collection rule can be found in [Tutorial: Send data to Azure Monitor Logs using REST API (Azure portal)](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/tutorial-logs-ingestion-portal)
 
