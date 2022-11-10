@@ -10,7 +10,7 @@ on:
     paths-ignore:
       - '**.md'
       - '**.json'
-      - 'main.yml'
+      - '**/main.yml'
   workflow_dispatch:
 
 jobs:
