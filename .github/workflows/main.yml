@@ -7,6 +7,10 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - '**.md'
+      - '**.json'
+      - 'main.yml'
   workflow_dispatch:
 
 jobs:

@@ -1,5 +1,9 @@
 # CostMgmtTools
 
+> :warning: **Warning:**
+> **This deployment is meant for Demo, Test, Learning, Training, Practice or Reproduction purposes ONLY!!**
+> **Please don't deploy to production environments!!**
+
 ## Log-RunningVM
 This Function app reports on how many VM's per VmSize currently are running. This information is logged to a Log Analytics workspace. This is especially usefull for machines that are dynamically switched on and of. The logging could help in deciding how to purchase an Azure Saving plan. 
 
