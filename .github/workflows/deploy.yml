@@ -141,7 +141,7 @@ jobs:
             workspaceId=${{ inputs.workspaceId }}
             resourceGroupLocation=${{ inputs.region }}
             azureSubscriptionIDs=${{ inputs.subscriptionsToMonitor}}
-  - uses: azure/arm-deploy@v1
+    - uses: azure/arm-deploy@v1
       id: roleAssignement
       name: Assign RBAC Role
       with:

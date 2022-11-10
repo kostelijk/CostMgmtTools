@@ -31,9 +31,9 @@ New-AzADAppFederatedCredential `
    -Audience 'api://AzureADTokenExchange' `
    -Subject "repo:$($githubOrganizationName)/$($githubRepositoryName):ref:refs/heads/main" # Main branch
    #-Subject "repo:$($githubOrganizationName)/$($githubRepositoryName):environment:Website" # When working with Github Environments in public repo's
-
-
 New-AzADServicePrincipal -AppId $($applicationRegistration.AppId)
+
+# Grant workload identity access
 New-AzRoleAssignment `
    -ApplicationId $($applicationRegistration.AppId) `
    -RoleDefinitionName Owner `
