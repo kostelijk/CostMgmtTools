@@ -1,4 +1,4 @@
-# CostMgmtTools
+# CostMgmtTools.
 
 This repository is meant to hold tools that can be used for cost management (and learning purposes for myself). The first tool is meant to get insight on how many VMs of a certain type run at any moment. This is especially usefull for machines that are dynamically switched on and of. The logging could help in deciding how to purchase an [Azure Saving plan](https://learn.microsoft.com/en-us/azure/cost-management-billing/savings-plan/).
 
@@ -6,7 +6,7 @@ This repository is meant to hold tools that can be used for cost management (and
 > **This deployment is meant for Demo, Test, Learning, Training, Practice or Reproduction purposes ONLY!!**
 > **Please don't deploy to production environments!!**
 
-## Log-RunningVM
+## Log-RunningVM.
 This Function app reports on how many VM's per VmSize currently are running. This information is logged to a Log Analytics workspace. 
 
 Information on how to setup Log Analytics, a Data Collection Endpoint and a Data Collection rule can be found in [Tutorial: Send data to Azure Monitor Logs using REST API (Azure portal)](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/tutorial-logs-ingestion-portal)
@@ -18,7 +18,7 @@ The Function App Application Settings should contain these additional Applicatio
 - **DceURI.** The URI which is configured during the configuration of the Data Collection Endpoint. [Configure Application](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/tutorial-logs-ingestion-portal#configure-application) 
 - **DcrImmutableId.** [Collect information from DCR](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/tutorial-logs-ingestion-portal#collect-information-from-dcr)
 
-## Workflow identity federation
+## Workflow identity federation.
 The solution uses [Workflow identity federation](https://learn.microsoft.com/en-us/azure/active-directory/develop/workload-identity-federation) to run the GitHub Actions. Permissions to the app registration being used were set on management group level. This way the pipeline can set read permissions for the function app on every subscription in scope (needed to get all the running VMs). Example: [Set up environment](https://learn.microsoft.com/en-us/training/modules/test-bicep-code-using-github-actions/4-exercise-set-up-environment?pivots=powershell)
 
 Example script to configure Workflow identity federation:
