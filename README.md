@@ -1,4 +1,4 @@
-# CostMgmtTools!
+# CostMgmtTools.
 
 This repository is meant to hold tools that can be used for cost management (and learning purposes for myself). The first tool is meant to get insight on how many VMs of a certain type run at any moment. This is especially usefull for machines that are dynamically switched on and of. The logging could help in deciding how to purchase an [Azure Saving plan](https://learn.microsoft.com/en-us/azure/cost-management-billing/savings-plan/).
 
